@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# use `docker ps` to show running containers.
+
+docker stop cplusplus

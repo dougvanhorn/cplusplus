@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# You can use this to attach to the running cplusplus container we started with
+# docker compose up --build.
+
+docker exec --interactive --tty cplusplus /bin/bash

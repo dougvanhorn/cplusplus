@@ -1,0 +1,32 @@
+version: '3.8'
+
+# A compose file is really for orchestrating the setup and startup of multiple services.
+# I included it here more as an example.  You can just use the `run` script to run a container and attach to it.
+# 
+# You would use this file as:
+#
+#    docker compose up --build
+#
+# Which would build and start the container.
+# You would then need to attach to it with:
+#
+#     docker exec --interactive --tty cplusplus /bin/bash
+#     # or
+#     docker exec -it cplusplus /bin/bash
+
+
+services:
+  cplusplus:
+    image: cplusplus-image
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    tty: true
+
+    container_name: cplusplus
+
+    volumes:
+      - type: bind
+        source: .
+        target: /opt

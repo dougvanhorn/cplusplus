@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+# Use this to create the container for the first time.
+#docker run --name cplusplus -it --volume ${PWD}:/opt ubuntu:22.04 /bin/bash
+
+# Use this to start the container.
+docker start --interactive cplusplus

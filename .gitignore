@@ -1,0 +1,9 @@
+# Ignore files.
+
+# IDE cruft.
+.vscode
+
+
+# Build files
+random
+random.dSYM
