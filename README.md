@@ -68,14 +68,19 @@ And if everything went well, you should be able to build the random.cpp file:
 
     ```bash
     $ make
-    g++ -std=c++17 random.cpp -o random
+    g++ -std=c++17 -g -Wall -o main foo.cpp random.cpp
     ```
 
 And run the executable:
 
     ```bash
-    $ ./random
-    x: 0
-    result: 0
-    result: 1
+    $ ./main
+    Hello, world.
     ```
+
+## Summary
+
+Our Makefile builds two CPP files, links them together, and outputs an executable.
+
+We define a function in foo.cpp, it's prototype in foo.h, and include it in random.cpp so we can
+use it.
