@@ -1,0 +1,6 @@
+Doe, John           G 2.3
+Smith, Sue          R 0.1
+Rogers, Scott       R 1.7
+Durham, Bull        G 8.0
+Rogers, Buck        R 0.042
+Areallylongname, JoeG 5.1

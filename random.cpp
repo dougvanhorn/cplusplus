@@ -5,11 +5,19 @@
 
 #include "foo.h"
 
-using namespace std;
+using std::cout;
+using std::endl;
 
 
 int main() {
     hello_world();
+
+    for(int x = 1; x < 49; ++x)
+    {
+        x++;
+        cout << x << endl;
+    }
+
     return 0;
 }
 
