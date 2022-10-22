@@ -8,3 +8,8 @@
 main
 random
 random.dSYM
+
+
+# Python cruft.
+__pycache__
+.python-version

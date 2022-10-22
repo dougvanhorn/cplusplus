@@ -1,5 +1,5 @@
-//Ethan Van Horn
-//A Program to calculate costs for overdue books to an output file
+// Ethan Van Horn
+// A Program to calculate costs for overdue books to an output file
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -10,12 +10,24 @@
 using namespace std;
 
 
+// Fill the arrays with the amount of data in the input file
 void fill_arrays(string patron_name[], char book_type[], double days_overdue[], int &amount_of_records);
+
+// Fill the fine_cost array with the amount of fines owed per patron
 void calculate_fines(double days_overdue[], int amount_of_records, double fine_cost[], char book_type[]);
+
+// Sort the arrays from the highest fine cost to the lowest fine cost
 void sort_high_to_low(double days_overdue[], double fine_cost[], char book_type[], string patron_name[], int amount_of_records);
+
+// Send the fine sorted arrays to file output
 void send_to_output_high_to_low(double fine_cost[], string patron_name[], int amount_of_records);
+
+// Sort the arrays by the alphabetical order of the patrons names
 void sort_alphabetically(double days_overdue[], double fine_cost[], char book_type[], string patron_name[], int amount_of_records);
+
+// Send the alphabetically sorted arrays to file output
 void send_to_output_alphabetically(double days_overdue[], double fine_cost[], char book_type[], string patron_name[], int amount_of_records);
+
 
 int main()
 {
@@ -27,18 +39,35 @@ int main()
   double fine_cost[MAX_PATRONS];
   int amount_of_records = 0;
 
-  //calls the fill_arrays function to fill the arrays with the amount of data in the input file
+  // calls the fill_arrays function to fill the arrays with the amount of data in the input file
   fill_arrays(patron_name, book_type, days_overdue, amount_of_records);
-  //calls the calculate_fines function to fill the fine_cost array with the amount of fines owed per patron
+
+  // We now have the input file data in our arrays ready to process.
+
+  // calls the calculate_fines function to fill the fine_cost array with the amount of fines owed per patron
   calculate_fines(days_overdue, amount_of_records, fine_cost, book_type);
-  //calls the sort_high_to_low function to sort the arrays from the highest fine cost to the lowest fine cost
+
+  // Our fine_cost array is now filled in.
+
+  // calls the sort_high_to_low function to sort the arrays from the highest fine cost to the lowest fine cost
   sort_high_to_low(days_overdue, fine_cost, book_type, patron_name, amount_of_records);
-  //calls the send_to_output_high_to_low function to send the fine sorted arrays to file output
+
+  // The arrays are now sorted by `fine_cost`.
+
+  // calls the send_to_output_high_to_low function to send the fine sorted arrays to file output
   send_to_output_high_to_low(fine_cost, patron_name, amount_of_records);
-  //calls the sort_alphabetically function to sort the arrays by the alphabetical order of the patrons names
+
+  // results.txt is now saved to disk with High to Low output.
+
+  // calls the sort_alphabetically function to sort the arrays by the alphabetical order of the patrons names
   sort_alphabetically(days_overdue, fine_cost, book_type, patron_name, amount_of_records);
-  //calls the send_to_output_alphabetically function to send the alphabetically sorted arrays to file output
+
+  // Arrays are now sorted by name alphabetically.
+
+  // calls the send_to_output_alphabetically function to send the alphabetically sorted arrays to file output
   send_to_output_alphabetically(days_overdue, fine_cost, book_type, patron_name, amount_of_records);
+
+  // Alphabetical output appeneded to results.txt.
 
   return 0;
 }
@@ -174,7 +203,16 @@ void send_to_output_high_to_low(double fine_cost[], string patron_name[], int am
   //outputs all values sorted from the highest fine cost to the lowest
   for(unsigned current_index = INITIAL_INDEX; current_index < amount_of_records; current_index++)
   {
-  output_file << patron_name[current_index] << setfill(' ') << setw(33) << "$ " << fine_cost[current_index] << fixed << setprecision(2) << endl;
+    output_file
+      << patron_name[current_index]
+      << setfill(' ') << setw(31)
+      << "$ ";
+
+    output_file
+      // Format the decimal, fixed, 2 decimals, left pad.
+      << fixed << setprecision(2) << setfill(' ') << setw(5)
+      << fine_cost[current_index]
+      << endl;
   }
   cout << endl << endl <<endl;
 }
@@ -229,6 +267,7 @@ void send_to_output_alphabetically(double days_overdue[], double fine_cost[], ch
   //New array for turning the book type char into a full word
   string book_type_name[amount_of_records];
 
+  output_file << endl;
   output_file << "Alphabetical List of Customers and Corresponding Fine Info" << endl;
   output_file << "NAME" << setw(25) << "TYPE";
   output_file << setw(9) << "DAYS";
@@ -253,7 +292,11 @@ void send_to_output_alphabetically(double days_overdue[], double fine_cost[], ch
   {
     output_file << patron_name[current_index] << setfill(' ') << setw(11);
     output_file << book_type_name[current_index] << setw(8);
-    output_file << days_overdue[current_index] << setw(14);
-    output_file << "$ " << fine_cost[current_index] << endl;
+    output_file << days_overdue[current_index] << setw(12) << "$ ";
+    output_file
+      // Format the decimal, fixed, 2 decimals, left pad.
+      << fixed << setprecision(2) << setfill(' ') << setw(5)
+      << fine_cost[current_index]
+      << endl;
   }
 }
